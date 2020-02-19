@@ -1,0 +1,20 @@
+<!DOCTYPE configuration>
+
+<configuration>
+    <contextName>test</contextName>
+    <jmxConfigurator/>
+
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+            <customFields>{"env":"build"}</customFields>
+        </encoder>
+    </appender>
+
+    <logger name="com.genomics.pedigreeaudit" level="info" />
+
+    <root level="INFO">
+        <appender-ref ref="stdout" />
+    </root>
+
+</configuration>
