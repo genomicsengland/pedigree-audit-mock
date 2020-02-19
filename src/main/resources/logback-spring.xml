@@ -23,7 +23,7 @@
     <logger name="com.genomics.pedigreeaudit" level="info" />
 
     <root level="INFO">
-        <appender-ref ref="Console" />
+        <appender-ref ref="stdout" />
     </root>
 
 </configuration>
