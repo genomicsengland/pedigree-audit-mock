@@ -46,7 +46,7 @@ pipeline {
 					logstash {		
 						sh "pwd"
 						script {
-							sh 'mvn -Dmaven.test.skip=true package'
+							sh 'mvn package'
 
 							VERSION = sh (
 									script : '''mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' \\
@@ -58,26 +58,6 @@ pipeline {
 				}
 			}
         }
-        stage('Run Unit Tests') {
-           	steps {
-				timestamps {
-					logstash {
-						script {
-								sh '''mvn test jacoco:report -Dspring.profiles.active=test \\
-										-Dsurefire.suiteXmlFiles=src/test/resources/unit-tests.xml'''
-								sh "mv target/site/jacoco/index.html unit.html"
-								sh "mv target/surefire-reports/TestSuite.txt unit.txt"
-
-								sh '''mvn test jacoco:report -Dspring.profiles.active=test \\
-										-Dsurefire.suiteXmlFiles=src/test/resources/integration-tests.xml'''
-								sh "mv target/surefire-reports/TestSuite.txt integration.txt"
-
-						}
-					}
-				}
-			}
-        }
-
         stage('Build and Push Docker Image (develop)') {
             steps {
 				timestamps {
