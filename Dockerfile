@@ -12,4 +12,4 @@ RUN  chgrp -R 0 /datadog && chmod -R g+rwX /datadog
 
 COPY target/pedigree-audit-?.?.?.jar pedigree-audit.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-javaagent:datadog/dd-java-agent.jar", "-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=prod","-jar","pedigree-audit.jar"]
+ENTRYPOINT ["java", "-javaagent:datadog/dd-java-agent.jar", "-Dcom.sun.management.jmxremote","-Dcom.sun.management.jmxremote.port=7199","-Dcom.sun.management.jmxremote.authenticate=false","-Dcom.sun.management.jmxremote.ssl=false", "-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=prod","-jar","pedigree-audit.jar"]
